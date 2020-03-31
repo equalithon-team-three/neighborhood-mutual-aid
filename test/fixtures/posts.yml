@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  request_offer: MyString
+  details: MyString
+  date_posted: MyString
+  location: MyString
+  quantity: MyString
+  deadline: MyString
+  completed: MyString
+
+two:
+  title: MyString
+  request_offer: MyString
+  details: MyString
+  date_posted: MyString
+  location: MyString
+  quantity: MyString
+  deadline: MyString
+  completed: MyString
