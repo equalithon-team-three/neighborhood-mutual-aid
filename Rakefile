@@ -4,3 +4,5 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+task "db:nuke": [:"db:reset", :"db:seed"]
