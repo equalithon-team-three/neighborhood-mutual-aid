@@ -29,7 +29,17 @@
 # User.delete_all
 
 User.create(first_name: "Meredith", last_name: "Strickland", email: "123@traid.com")
-User.create(first_name: "Jessica", last_name: "Lin", email:"jess@traid.com")
+jessica = User.create(first_name: "Jessica", last_name: "Lin", email:"jess@traid.com")
 
-Post.create(title: 'Something', request_offer: true, details:'more', user_id: 1)
+something =  Post.create(title: 'Something', request_offer: true, details:'more', user_id: 1)
 Post.create(title: 'Test2', request_offer: true, details:'other', user_id: 2)
+
+
+AssignmentStatus.create!(name: "Assigned")
+AssignmentStatus.create!(name: "Expired")
+AssignmentStatus.create!(name: "Accepted")
+AssignmentStatus.create!(name: "Rejected")
+complete = AssignmentStatus.create!(name: "Complete")
+
+Assignment.create!(post: something, user: jessica, status: complete)
+

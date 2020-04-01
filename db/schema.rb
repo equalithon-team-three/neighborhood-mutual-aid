@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_31_224857) do
+ActiveRecord::Schema.define(version: 2020_04_01_044303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignment_statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.bigint "assignment_status_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assignment_status_id"], name: "index_assignments_on_assignment_status_id"
+    t.index ["post_id"], name: "index_assignments_on_post_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -38,5 +55,8 @@ ActiveRecord::Schema.define(version: 2020_03_31_224857) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "assignments", "assignment_statuses"
+  add_foreign_key "assignments", "posts"
+  add_foreign_key "assignments", "users"
   add_foreign_key "posts", "users"
 end

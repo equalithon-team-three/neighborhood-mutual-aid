@@ -1,0 +1,2 @@
+class AssignmentStatus < ApplicationRecord
+end
