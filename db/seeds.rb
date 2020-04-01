@@ -28,8 +28,8 @@
 # Post.delete_all
 # User.delete_all
 
-# User.create(first_name: "Meredith", last_name: "Strickland", email: "123@traid.com")
-# User.create(first_name: "Jessica", last_name: "Lin", email:"jess@traid.com")
+User.create(first_name: "Meredith", last_name: "Strickland", email: "123@traid.com")
+User.create(first_name: "Jessica", last_name: "Lin", email:"jess@traid.com")
 
-Post.create(title: 'Something', request_offer: true, details:'more', user_id: 15)
-Post.create(title: 'Test2', request_offer: true, details:'other', user_id: 16)
+Post.create(title: 'Something', request_offer: true, details:'more', user_id: 1)
+Post.create(title: 'Test2', request_offer: true, details:'other', user_id: 2)
