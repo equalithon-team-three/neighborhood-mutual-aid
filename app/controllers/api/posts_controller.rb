@@ -3,11 +3,23 @@ class Api::PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    user_id = params["user_id"].to_i
 
-    if User.exists? params["user_id"]
-      user_posts = @posts.where user_id: params["user_id"]
-      other_posts = @posts.where.not user_id: params["user_id"]
+    if User.exists? user_id
+      user_posts = @posts.where user_id: user_id
+      other_posts = @posts.where.not user_id: user_id
       @posts = {user_posts: user_posts, other_posts: other_posts}
+
+      # # Single db ping approach:
+      # @posts = @posts.reduce({user_posts: [], other_posts: []}) {|acc, cur_post|
+      #   if cur_post["user_id"] == user_id
+      #     acc[:user_posts].push(cur_post)
+      #   else
+      #     acc[:other_posts].push(cur_post)
+      #   end
+
+      #   acc
+      # }
     end
 
     render json: @posts, include: :user
