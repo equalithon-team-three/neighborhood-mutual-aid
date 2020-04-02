@@ -20,16 +20,27 @@ class Api::PostsController < ApplicationController
     render json: @post 
   end 
 
+
+  def show 
+    render json: @post 
+  end 
+
   def edit
+    render json: @post
   end 
 
   def update 
+    @post.update(post_params)
+    if @post.save
+      render json: @post, status: :accepted
+    else
+      render json: { error: 'Could not update post'}
+    end
   end 
 
   def destroy 
-    @post = Post.find(params[:id])
     @post.destroy 
-    render json: {message: 'this post was deleted'}
+    render json: {message: 'This post was deleted'}
   end 
 
 
