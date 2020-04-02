@@ -22,3 +22,22 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+## Schema
+
+    Users ----< Posts >-------- PostCategory 
+                  |                  |
+                  |                  |
+                  |                  ^
+                  |             Taggability
+                  |                 \/
+                  |                  |
+                  |                  |
+                  |            TagCategories
+                  |                  |
+                  |                  |
+                  |                  |
+                  |                  |
+                  |                  ^
+                  ----------------< Tags
