@@ -1,28 +1,22 @@
 class Api::UsersController < ApplicationController
-  before_action :find_user, only: %i[show edit update destroy]
-
+  before_action :find_user, only: %i[show update destroy]
 
   def index
     @user = User.all 
     render json: @users 
   end 
 
-  def new
-    @user = User.new 
-  end 
-
   def create
     @user = User.new(user_params)
-    @user.save
-    render json: @user, status: :accepted
+    if @user.save 
+      render json: @user, status: :accepted
+    else
+      render json: { errors: @user.errors.full_messages }
+    end
   end 
 
   def show 
     render json: @user 
-  end 
-
-  def edit 
-    render json: @user
   end 
 
   def update 
@@ -30,13 +24,13 @@ class Api::UsersController < ApplicationController
     if @user.save 
       render json: @user, status: :accepted 
     else 
-      render json: {error: 'Could not update user'}
+      render json: { errors: @user.errors.full_messages }
     end
   end 
 
   def destroy 
     @user.destroy 
-    render json: {message: 'User deleted'}
+    render json: { message: 'User deleted' }
   end 
 
 
