@@ -1,7 +1,16 @@
 class AuthController < ApplicationController
 
+  include TokenGeneration
+  include AuthCookie
+
   def login
-    token = JWT.encode payload, rsa_private, 'RS256'
+    set_auth_cookie(generate_token(9))
+    render json: { hello: true }
+  end
+
+  def register
+    set_auth_cookie(generate_token(9))
+    render json: { hello: true }
   end
 
 end
