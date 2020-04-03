@@ -3,11 +3,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :posts
-
     resources :users do
       resources :posts, only:[:index]
     end
 
   end
+
+  post '/auth/login', to: 'auth#login'
 
 end
