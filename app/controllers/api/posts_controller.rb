@@ -1,19 +1,18 @@
 class Api::PostsController < ApplicationController
-  before_action :find_post, only: [:update, :destroy, :show, :edit]
+  before_action :find_post, only: [:update, :destroy, :show]
 
   def index
     @posts = Post.all 
     render json: @posts
   end
 
-  def new
-    @post = Post.new
-  end
-
   def create
     @post = Post.new(post_params)
-    @post.save
-    render json: @post, status: :accepted
+    if @post.save
+      render json: @post, status: :accepted
+    else
+      render json: { errors:  @post.errors.full_messages }
+    end
   end
 
   def show 
@@ -34,7 +33,7 @@ class Api::PostsController < ApplicationController
     if @post.save
       render json: @post, status: :accepted
     else
-      render json: { error: 'Could not update post'}
+      render json: { errors:  @post.errors.full_messages }
     end
   end 
 
