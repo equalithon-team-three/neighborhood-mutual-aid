@@ -73,8 +73,8 @@ errand_type = TagCategory.create!(name: "Errand Type")
 shopping = Tag.create!(name: "Grocery shopping", tag_category: errand_type)
 Tag.create!(name: "Prescription pick-up", tag_category: errand_type)
 
-mere = User.create!(first_name: "Meredith", last_name: "Strickland", email: "123@traid.com")
-jessica = User.create!(first_name: "Jessica", last_name: "Lin", email:"jess@traid.com")
+mere = User.create!(first_name: "Meredith", last_name: "Strickland", email: "123@traid.com", password: "iwashmyhandsfor20seconds!")
+jessica = User.create!(first_name: "Jessica", last_name: "Lin", email:"jess@traid.com", password: "iwashmyhandsfor20seconds!")
 
 ppe = PostCategory.create!(name: "Personal protective equipment")
 ppe.tag_categories << ppe_type
