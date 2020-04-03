@@ -29,6 +29,10 @@
 # User.delete_all
 
 
+# User.create(first_name: "Meredith", last_name: "Strickland", email: "123@traid.com", password: "iwashmyhandsfor20seconds!")
+# User.create(first_name: "Jessica", last_name: "Lin", email:"jess@traid.com", password: "iwashmyhandsfor20seconds!")
+# =======
+
 ppe_type = TagCategory.create!(name: "Type of personal protective equipment")
 
 handmade_masks = Tag.create!(name: "Masks (handmade)", tag_category: ppe_type)
