@@ -3,12 +3,16 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :posts
+    resources :post_categories, only: [:index]
     resources :users do
-      resources :posts, only:[:index]
+      resources :posts, only: [:index]
     end
 
   end
 
+  post '/auth/check', to: 'auth#check'
   post '/auth/login', to: 'auth#login'
+  post '/auth/register', to: 'auth#register'
+  post '/auth/logout', to: 'auth#logout'
 
 end
