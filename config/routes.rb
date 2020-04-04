@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :posts
+    resources :post_categories, only: [:index]
     resources :users do
       resources :posts, only: [:index]
     end
