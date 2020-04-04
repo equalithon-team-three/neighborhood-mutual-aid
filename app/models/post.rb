@@ -1,10 +1,17 @@
 class Post < ApplicationRecord
+
+  validates :title, presence: true
+  validates :details, presence: true
   
   belongs_to :user
   belongs_to :post_category
   has_many :tag_categories, through: :post_category
 
   has_many :taggings
-  has_many :tags, through: :taggings
+  has_many :tags, through: :taggings 
+
+  def matching_posts
+    post_category.posts.where.not(id: id).where.not(request_offer: request_offer)
+  end 
   
 end
