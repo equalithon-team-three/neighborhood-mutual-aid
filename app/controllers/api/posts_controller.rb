@@ -10,10 +10,7 @@ class Api::PostsController < ApplicationController
       
       user_posts_completed = @posts.where({user_id: user_id, completed: true})
       user_posts_not_completed = @posts.where({user_id: user_id, completed: false || nil})
-      other_posts = @posts.where.not({user_id: user_id})
-      other_posts_not_completed = other_posts.select do |hash|
-        hash[:completed] != true
-      end
+      other_posts_not_completed = @posts.where.not({user_id: user_id}, {completed: true})
 
       @posts = {user_posts: {completed: user_posts_completed, not_completed: user_posts_not_completed}, other_posts: other_posts_not_completed}
     end
@@ -22,7 +19,7 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    
+
     @post = Post.new(post_params.merge(user_id: logged_in_user_id))
     if @post.save
       render json: @post, status: :accepted
