@@ -25,21 +25,17 @@ class Api::PostsController < ApplicationController
     render json: @posts, include: :user
   end
 
-  def new
-    @post = Post.new
-  end
-
   def create
-    @post = Post.new(post_params)
-    @post.save
-    render json: @post, status: :accepted
+    @post = Post.new(post_params.merge(user_id: logged_in_user_id))
+    if @post.save
+      render json: @post, status: :accepted
+    else
+      render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def show
     render json: @post
-  end
-
-  def edit
   end
 
   def update
@@ -60,7 +56,7 @@ class Api::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:user_id).permit(:title, :request_offer, :details, :date_posted, :location, :quantity, :deadline, :completed)
+    params.permit(:title, :request_offer, :details, :date_posted, :location, :quantity, :deadline, :completed, :post_category_id)
   end
 
   def find_post
