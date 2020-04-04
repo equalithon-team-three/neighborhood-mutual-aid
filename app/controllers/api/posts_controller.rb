@@ -4,9 +4,9 @@ class Api::PostsController < ApplicationController
   def index
     @posts = Post.incomplete
     user_id = params["user_id"].to_i
-
-    if user_id && User.exists? user_id 
-      return head :unauthorized unless logged_in_as? user_id
+    
+    if user_id && User.exists?(user_id)
+      return head :unauthorized unless logged_in_as?(user_id)
       
       user_posts_completed = @posts.where({user_id: user_id, completed: true})
       user_posts_not_completed = @posts.where({user_id: user_id, completed: false || nil})
@@ -29,7 +29,7 @@ class Api::PostsController < ApplicationController
   end
 
   def show
-    render json: @post
+    render json: @post, include: :matching_posts
   end
 
   def update
