@@ -9,7 +9,7 @@ module TokenGeneration
   private
 
   def private_key
-    OpenSSL::PKey::RSA.new(ENV['TOKEN_PRIVATE_KEY'])
+    OpenSSL::PKey::RSA.new ENV['TOKEN_PRIVATE_KEY']
   end
 
 

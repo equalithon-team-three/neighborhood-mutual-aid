@@ -5,7 +5,7 @@ module AuthCookie
       {
         value: payload,
         expires: 7.days.from_now,
-        path: '/api',
+        # path: '/api',
         httponly: true
       }
     )
