@@ -6,20 +6,14 @@ class Api::PostsController < ApplicationController
     user_id = params["user_id"].to_i
 
     if User.exists? user_id
-      user_posts = @posts.where user_id: user_id
-      other_posts = @posts.where.not user_id: user_id
-      @posts = {user_posts: user_posts, other_posts: other_posts}
+      user_posts_completed = @posts.where({user_id: user_id, completed: true})
+      user_posts_not_completed = @posts.where({user_id: user_id, completed: false || nil})
+      other_posts = @posts.where.not({user_id: user_id})
+      other_posts_not_completed = other_posts.select do |hash|
+        hash[:completed] != true
+      end
 
-      # # Single db ping approach:
-      # @posts = @posts.reduce({user_posts: [], other_posts: []}) {|acc, cur_post|
-      #   if cur_post["user_id"] == user_id
-      #     acc[:user_posts].push(cur_post)
-      #   else
-      #     acc[:other_posts].push(cur_post)
-      #   end
-
-      #   acc
-      # }
+      @posts = {user_posts: {completed: user_posts_completed, not_completed: user_posts_not_completed}, other_posts: other_posts_not_completed}
     end
 
     render json: @posts, include: :user
