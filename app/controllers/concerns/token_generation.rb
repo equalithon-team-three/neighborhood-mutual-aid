@@ -23,8 +23,9 @@ module TokenGeneration
   #
   # 3. Actually generate these keys, like this:
   #
-  # rsa_private = OpenSSL::PKey::RSA.generate(2048).to_s
-  # rsa_public = rsa_private.public_key.to_s
+  # rsa_private = OpenSSL::PKey::RSA.generate(2048)
+  # rsa_private_string = rsa_private.to_s
+  # rsa_public_string = rsa_private.public_key.to_s
   #
   # 4. Then puttem in the .env file.
   # 5. That's it
