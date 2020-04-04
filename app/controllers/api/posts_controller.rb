@@ -26,6 +26,7 @@ class Api::PostsController < ApplicationController
   end
 
   def create
+    
     @post = Post.new(post_params.merge(user_id: logged_in_user_id))
     if @post.save
       render json: @post, status: :accepted
