@@ -11,7 +11,7 @@ class Post < ApplicationRecord
   has_many :tags, through: :taggings 
 
   def matching_posts
-    post_category.posts.where.not(id: id).where.not(request_offer: request_offer)
+    post_category.posts.where.not(user_id: user_id).where.not(request_offer: request_offer)
   end 
   
 end

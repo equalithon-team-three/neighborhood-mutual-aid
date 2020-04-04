@@ -11,11 +11,12 @@ RSpec.describe Post, type: :model do
       foo = PostCategory.create!(name: "Foo")
       bar = PostCategory.create!(name: "Bar")
 
-      post_foo = Post.create!(post_category: foo, title: "Test", details: "Test", user: romy, request_offer: true)
-      post_foo2 = Post.create!(post_category: foo, title: "Test", details: "Test", user: michelle, request_offer: false)
-      post_bar = Post.create!(post_category: bar, title: "Test", details: "Test", user: romy, request_offer: false)
+      post_foo_romy_request = Post.create!(post_category: foo, title: "Test", details: "Test", user: romy, request_offer: true)
+      post_foo_michelle_offer = Post.create!(post_category: foo, title: "Test", details: "Test", user: michelle, request_offer: false)
+      post_foo_romy_offer = Post.create!(post_category: foo, title: "Test", details: "Test", user: romy, request_offer: false)
+      post_bar_michelle_offer = Post.create!(post_category: bar, title: "Test", details: "Test", user: michelle, request_offer: false)
 
-      expect(post_foo.matching_posts).to match([ post_foo2, post_bar ])
+      expect(post_foo_romy_request.matching_posts).to match([ post_foo_michelle_offer ])
     end
   end
 
