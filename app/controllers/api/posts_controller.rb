@@ -2,10 +2,12 @@ class Api::PostsController < ApplicationController
   before_action :find_post, only: [:update, :destroy, :show, :edit]
 
   def index
-    @posts = Post.all
+    @posts = Post.incomplete
     user_id = params["user_id"].to_i
 
-    if User.exists? user_id
+    if user_id && User.exists? user_id 
+      return head :unauthorized unless logged_in_as? user_id
+      
       user_posts_completed = @posts.where({user_id: user_id, completed: true})
       user_posts_not_completed = @posts.where({user_id: user_id, completed: false || nil})
       other_posts = @posts.where.not({user_id: user_id})
