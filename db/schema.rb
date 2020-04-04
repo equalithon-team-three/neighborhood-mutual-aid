@@ -10,27 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_044303) do
+ActiveRecord::Schema.define(version: 2020_04_04_223508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "assignment_statuses", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "assignments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
-    t.bigint "assignment_status_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["assignment_status_id"], name: "index_assignments_on_assignment_status_id"
-    t.index ["post_id"], name: "index_assignments_on_post_id"
-    t.index ["user_id"], name: "index_assignments_on_user_id"
-  end
 
   create_table "post_categories", force: :cascade do |t|
     t.string "name"
@@ -46,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_044303) do
     t.string "location"
     t.string "quantity"
     t.datetime "deadline"
-    t.boolean "completed"
+    t.boolean "completed", default: false, null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -96,9 +79,6 @@ ActiveRecord::Schema.define(version: 2020_04_01_044303) do
     t.string "password_digest"
   end
 
-  add_foreign_key "assignments", "assignment_statuses"
-  add_foreign_key "assignments", "posts"
-  add_foreign_key "assignments", "users"
   add_foreign_key "posts", "post_categories"
   add_foreign_key "posts", "users"
   add_foreign_key "taggabilities", "post_categories"
