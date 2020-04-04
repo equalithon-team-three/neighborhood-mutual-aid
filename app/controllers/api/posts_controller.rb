@@ -2,32 +2,24 @@ class Api::PostsController < ApplicationController
   before_action :find_post, only: [:update, :destroy, :show, :edit]
 
   def index
-    @posts = Post.all
+    @posts = Post.incomplete
     user_id = params["user_id"].to_i
-
+    
     if user_id && User.exists?(user_id)
       return head :unauthorized unless logged_in_as?(user_id)
+      
+      user_posts_completed = @posts.where({user_id: user_id, completed: true})
+      user_posts_not_completed = @posts.where({user_id: user_id, completed: false || nil})
+      other_posts_not_completed = @posts.where.not({user_id: user_id}, {completed: true})
 
-      user_posts = logged_in_user.posts # tal this will include completed and uncompleted, but you can use the scope to filter I think
-      other_posts = @posts.where.not user_id: user_id
-      @posts = {user_posts: user_posts, other_posts: other_posts}
-
-      # # Single db ping approach:
-      # @posts = @posts.reduce({user_posts: [], other_posts: []}) {|acc, cur_post|
-      #   if cur_post["user_id"] == user_id
-      #     acc[:user_posts].push(cur_post)
-      #   else
-      #     acc[:other_posts].push(cur_post)
-      #   end
-
-      #   acc
-      # }
+      @posts = {user_posts: {completed: user_posts_completed, not_completed: user_posts_not_completed}, other_posts: other_posts_not_completed}
     end
 
     render json: @posts, include: :user
   end
 
   def create
+
     @post = Post.new(post_params.merge(user_id: logged_in_user_id))
     if @post.save
       render json: @post, status: :accepted

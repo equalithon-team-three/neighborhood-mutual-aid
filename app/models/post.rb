@@ -13,5 +13,7 @@ class Post < ApplicationRecord
   def matching_posts
     post_category.posts.where.not(user_id: user_id).where.not(request_offer: request_offer)
   end 
-  
+
+  scope :incomplete, -> { where(completed: false) }
+
 end
