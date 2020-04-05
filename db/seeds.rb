@@ -113,6 +113,7 @@ financial_assistance.tag_categories << payment
 misc = PostCategory.create!(name: "Miscellaneous")
 
 
+posts = []
 
 PostCategory.all.each do |post_category|
 
@@ -120,14 +121,14 @@ PostCategory.all.each do |post_category|
 
         if [true, false].sample
 
-            Post.create!(user: User.all.sample, request_offer: true, post_category: post_category, 
-                    title: "I could definitely use some help!", 
-                    details: "I could definitely use some help with #{ post_category.name.downcase }, if you would be so kind")
+            posts << Post.new(user: User.all.sample, request_offer: true, post_category: post_category, 
+                    title: "I #{ ["can", "could"].sample } #{ ["definitely", "", "certainly"].sample } use some help!", 
+                    details: "I #{ ["can", "could"].sample } #{ ["definitely", "", "certainly"].sample } use some help with #{ post_category.name.downcase }, if you would be so kind")
 
         else 
-            Post.create!(user: User.all.sample, request_offer: false, post_category: post_category, 
-                    title: "Can I help you out?", 
-                    details: "I would love to help you out with #{ post_category.name.downcase }, if you need some assistance")
+            posts << Post.new(user: User.all.sample, request_offer: false, post_category: post_category, 
+                    title: "#{ ["Can", "Could", "Might"].sample } I help you #{ [true, false].sample ? " out" : "" }?", 
+                    details: "I #{ ["would love to", "would like to", "can", "could",].sample } help you out with #{ post_category.name.downcase }, if you need some assistance")
 
         end
 
@@ -135,6 +136,7 @@ PostCategory.all.each do |post_category|
 
 end
 
+posts.shuffle.each { |post| post.save! }
 
 
 

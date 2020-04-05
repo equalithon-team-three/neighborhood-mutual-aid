@@ -2,7 +2,7 @@ class Api::PostsController < ApplicationController
   before_action :find_post, only: [:update, :destroy, :show, :edit]
 
   def index
-    @posts = Post.incomplete
+    @posts = Post.incomplete.includes(:user)
     user_id = params["user_id"].to_i
     
     if user_id && User.exists?(user_id)
