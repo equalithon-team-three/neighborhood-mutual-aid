@@ -29,7 +29,7 @@ class Api::PostsController < ApplicationController
   end
 
   def show
-    render json: @post, include: :matching_posts
+    render json: @post, include: { matching_posts: { include: :user }, post_category: {}, user: {} }
   end
 
   def update
