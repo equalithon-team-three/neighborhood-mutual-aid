@@ -2,7 +2,7 @@ class Api::PostsController < ApplicationController
   before_action :find_post, only: [:update, :destroy, :show, :edit]
 
   def index
-    @posts = Post.incomplete
+    @posts = Post.incomplete.includes(:user)
     user_id = params["user_id"].to_i
 
     if user_id && User.exists?(user_id)
@@ -12,10 +12,10 @@ class Api::PostsController < ApplicationController
       user_posts_not_completed = @posts.where({user_id: user_id, completed: false})
       other_posts_not_completed = @posts.where.not({user_id: user_id}, {completed: true})
 
-      @posts = {user_posts: {completed: user_posts_completed, not_completed: user_posts_not_completed}, other_posts: other_posts_not_completed}
+      @posts = { user_posts: {completed: user_posts_completed, not_completed: user_posts_not_completed}, other_posts: other_posts_not_completed}
     end
 
-    render json: @posts, include: :user
+    render json: @posts, include: { user: { except: [:password_digest] } }
   end
 
   def create
@@ -29,7 +29,11 @@ class Api::PostsController < ApplicationController
   end
 
   def show
-    render json: @post, include: { matching_posts: { include: :user }, post_category: {}, user: {} }
+    render json: @post, include: { 
+        post_category: {},
+        user: { except: [:password_digest] },
+        matching_posts: { include: { user: { except: [:password_digest] } } } 
+      }
   end
 
   def update

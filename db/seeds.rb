@@ -33,6 +33,13 @@
 # User.create(first_name: "Jessica", last_name: "Lin", email:"jess@traid.com", password: "iwashmyhandsfor20seconds!")
 # =======
 
+Tag.destroy_all
+Taggability.destroy_all
+Post.destroy_all
+TagCategory.destroy_all
+User.destroy_all
+PostCategory.destroy_all
+
 ppe_type = TagCategory.create!(name: "Type of personal protective equipment")
 
 handmade_masks = Tag.create!(name: "Masks (handmade)", tag_category: ppe_type)
@@ -73,8 +80,13 @@ errand_type = TagCategory.create!(name: "Errand Type")
 shopping = Tag.create!(name: "Grocery shopping", tag_category: errand_type)
 Tag.create!(name: "Prescription pick-up", tag_category: errand_type)
 
-mere = User.create!(first_name: "Meredith", last_name: "Strickland", email: "123@traid.com", password: "iwashmyhandsfor20seconds!")
-jessica = User.create!(first_name: "Jessica", last_name: "Lin", email:"jess@traid.com", password: "iwashmyhandsfor20seconds!")
+mere = User.create!(first_name: "Meredith", last_name: "Strickland", email: "mere@traid.com", password: "iwashmyhandsfor20seconds!")
+jess = User.create!(first_name: "Jessica", last_name: "Lin", email:"jess@traid.com", password: "iwashmyhandsfor20seconds!")
+graham = User.create!(first_name: "Meredith", last_name: "Strickland", email: "graham@traid.com", password: "iwashmyhandsfor20seconds!")
+tal = User.create!(first_name: "Tal", last_name: "luigi", email:"tal@traid.com", password: "iwashmyhandsfor20seconds!")
+sylwia = User.create!(first_name: "Sylwia", last_name: "Lin", email:"sylwia@traid.com", password: "iwashmyhandsfor20seconds!")
+rae = User.create!(first_name: "Rae", last_name: "Hochwald", email:"rae@traid.com", password: "iwashmyhandsfor20seconds!")
+
 
 ppe = PostCategory.create!(name: "Personal protective equipment")
 ppe.tag_categories << ppe_type
@@ -100,11 +112,37 @@ financial_assistance.tag_categories << payment
 
 misc = PostCategory.create!(name: "Miscellaneous")
 
-something = Post.create!(title: 'Something', request_offer: true, details:'more', user_id: mere.id, post_category_id: ppe.id)
-something.tags << handmade_masks
 
-test2 = Post.create!(title: 'Test2', request_offer: true, details:'other', user_id: jessica.id, post_category_id: errands.id)
-test2.tags << shopping
+posts = []
+
+PostCategory.all.each do |post_category|
+
+    5.times do 
+
+        if [true, false].sample
+
+            posts << Post.new(user: User.all.sample, request_offer: true, post_category: post_category, 
+                    title: "I #{ ["can", "could"].sample } #{ ["definitely", "", "certainly"].sample } use some help!", 
+                    details: "I #{ ["can", "could"].sample } #{ ["definitely", "", "certainly"].sample } use some help with #{ post_category.name.downcase }, if you would be so kind")
+
+        else 
+            posts << Post.new(user: User.all.sample, request_offer: false, post_category: post_category, 
+                    title: "#{ ["Can", "Could", "Might"].sample } I help you #{ [true, false].sample ? " out" : "" }?", 
+                    details: "I #{ ["would love to", "would like to", "can", "could",].sample } help you out with #{ post_category.name.downcase }, if you need some assistance")
+
+        end
+
+    end
+
+end
+
+posts.shuffle.each { |post| post.save! }
+
+
+
+
+
+
 
 
 
