@@ -39,6 +39,20 @@ class AuthController < ApplicationController
     render json: { authenticated: false }
   end
 
+  def google_oauth2_callback
+
+    @user = User.find_or_initialize_by(google_id: request.env['omniauth.auth']['uid'])
+    unless @user.persisted? 
+      @user.update!(first_name: request.env['omniauth.auth']['info']['first_name'],
+                   last_name: request.env['omniauth.auth']['info']['last_name'],
+                     image: request.env['omniauth.auth']['info']['image'],
+                     password: SecureRandom.uuid,
+                     email: request.env['omniauth.auth']['info']['email'])
+    end
+    set_auth_cookie(generate_token(@user.id))
+    redirect_to "https://tr-aid.web.app/oauthed"
+  end
+
   private
 
   def auth_params
