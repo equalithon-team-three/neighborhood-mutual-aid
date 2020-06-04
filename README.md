@@ -10,6 +10,10 @@
 
 https://tr-aid.web.app
 
+### Source:
+
+https://github.com/equalithon-team-three/traid-frontend
+
 ### Description:
 
 Responsive web app that allows users to offer and request aid from others in their community.
@@ -27,7 +31,7 @@ Built using Rails on the backend and React and Bootswatch on the frontend.
 - Meredith Strickland ([LinkedIn](https://www.linkedin.com/in/meredith-strickland) | [GitHub](https://github.com/merestrickland))
 - Jessica Lin ([LinkedIn](https://www.linkedin.com/in/lin-jessica) | [GitHub](https://github.com/lin-jessica))
 
-### Schema
+### Schema:
 
     Users ----< Posts >-------- PostCategory
                   |                  |
