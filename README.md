@@ -1,32 +1,39 @@
-# README
+# Traid
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![Traid Screenshot](./public/screenshot.png)
 
-Things you may want to cover:
+### Video Presentation:
 
-* Ruby version
+[![Traid Video Presentation](https://img.youtube.com/vi/_QVQUhjbVqs/0.jpg)](https://www.youtube.com/watch?v=_QVQUhjbVqs)
 
-* System dependencies
+### Deployed Web App:
 
-* Configuration
+https://tr-aid.web.app
 
-* Database creation
+### Source:
 
-* Database initialization
+https://github.com/equalithon-team-three/traid-frontend
 
-* How to run the test suite
+### Description:
 
-* Services (job queues, cache servers, search engines, etc.)
+Responsive web app that allows users to offer and request aid from others in their community.
 
-* Deployment instructions
+MVP completed using Agile methodologies in 7 days for the Essteem Hackathon for COVID-19 Relief sponsored by Girls Who Code, [in which it won first place](https://www.equalithon.io/past-challenges/traid).
 
-* ...
+### Tech Stack:
 
+Built using Ruby, Ruby on Rails, and Active Record on the backend and React and Bootswatch on the frontend.
 
-## Schema
+### Dev Team:
 
-    Users ----< Posts >-------- PostCategory 
+- Tal Luigi ([LinkedIn](https://www.linkedin.com/in/talluigi) | [GitHub](https://github.com/luigilegion))
+- Graham Troyer-Joy ([LinkedIn](https://www.linkedin.com/in/grahamtroyerjoy) | [GitHub](https://github.com/telegraham))
+- Meredith Strickland ([LinkedIn](https://www.linkedin.com/in/meredith-strickland) | [GitHub](https://github.com/merestrickland))
+- Jessica Lin ([LinkedIn](https://www.linkedin.com/in/lin-jessica) | [GitHub](https://github.com/lin-jessica))
+
+### Schema:
+
+    Users ----< Posts >-------- PostCategory
                   |                  |
                   |                  |
                   |                  ^
