@@ -1,5 +1,4 @@
 module TokenGeneration
-
   extend ActiveSupport::Concern
 
   def generate_token(user_id)
@@ -11,7 +10,6 @@ module TokenGeneration
   def private_key
     OpenSSL::PKey::RSA.new ENV['TOKEN_PRIVATE_KEY']
   end
-
 
   # Ok so this will error out pretty bad in local development unless you do this:
   #
@@ -29,5 +27,4 @@ module TokenGeneration
   #
   # 4. Then puttem in the .env file.
   # 5. That's it
-  
 end

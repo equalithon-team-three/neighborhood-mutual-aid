@@ -1,5 +1,4 @@
 module TokenDecoding
-
   extend ActiveSupport::Concern
 
   def decode_token token
@@ -17,9 +16,7 @@ module TokenDecoding
     OpenSSL::PKey::RSA.new ENV['TOKEN_PUBLIC_KEY']
   end
 
-
   # Ok so this will error out pretty bad in local development unless you do this:
   #
   # see TokenGeneration for details
-  
 end

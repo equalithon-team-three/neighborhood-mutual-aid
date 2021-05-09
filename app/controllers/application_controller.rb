@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-
   include TokenDecoding
 
   private
@@ -19,5 +18,4 @@ class ApplicationController < ActionController::API
   def logged_in_user
     @user ||= User.find(logged_in_user_id) if logged_in?
   end
-
 end

@@ -1,5 +1,4 @@
 module AuthCookie
-
   def set_auth_cookie(payload)
     response.set_cookie(:auth_token,
       {
@@ -10,5 +9,4 @@ module AuthCookie
       }
     )
   end
-
 end

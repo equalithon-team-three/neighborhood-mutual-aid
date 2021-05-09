@@ -19,7 +19,6 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-
     @post = Post.new(post_params.merge(user_id: logged_in_user_id))
     if @post.save
       render json: @post, status: :accepted
@@ -29,10 +28,10 @@ class Api::PostsController < ApplicationController
   end
 
   def show
-    render json: @post, include: { 
+    render json: @post, include: {
         post_category: {},
         user: { except: [:password_digest] },
-        matching_posts: { include: { user: { except: [:password_digest] } } } 
+        matching_posts: { include: { user: { except: [:password_digest] } } }
       }
   end
 
@@ -60,5 +59,4 @@ class Api::PostsController < ApplicationController
   def find_post
     @post = Post.find(params[:id])
   end
-
 end
