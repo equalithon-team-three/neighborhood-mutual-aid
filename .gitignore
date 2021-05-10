@@ -23,3 +23,6 @@
 
 # Ignore environment variables file.
 .env
+
+# Ignore application.yml file.
+/config/application.yml
