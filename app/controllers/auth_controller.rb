@@ -1,5 +1,4 @@
 class AuthController < ApplicationController
-
   include TokenGeneration
   include AuthCookie
 
@@ -64,7 +63,6 @@ class AuthController < ApplicationController
   end
 
   def google_oauth2_callback
-
     @user = User.find_or_initialize_by(google_id: request.env['omniauth.auth']['uid'])
     unless @user.persisted?
       @user.update!(
@@ -76,6 +74,7 @@ class AuthController < ApplicationController
         password: SecureRandom.uuid,
       )
     end
+
     set_auth_cookie(generate_token(@user.id))
     redirect_to "http://localhost:3001"
   end
@@ -85,5 +84,4 @@ class AuthController < ApplicationController
   def auth_params
     params.permit(:email, :password)
   end
-
 end

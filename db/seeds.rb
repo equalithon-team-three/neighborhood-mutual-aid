@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # User
-      # t.string :first_name
-      # t.string :last_name
-      # t.string :email
+    # t.string :first_name
+    # t.string :last_name
+    # t.string :email
 
 # Post
     # t.string "title"
@@ -96,7 +96,7 @@ volunteering.tag_categories << skills
 
 errands = PostCategory.create!(name: "Errands")
 errands.tag_categories << errand_type
-errands.tag_categories << payment # here we might want a "no payment needed" option but that doesn't make sense elsewhere this tag category is used
+errands.tag_categories << payment # Here we might want a "no payment needed" option but that doesn't make sense elsewhere this tag category is used
 
 chatroulette = PostCategory.create!(name: "Chat with a new friend")
 chatroulette.tag_categories << topics
@@ -107,8 +107,7 @@ tech_support.tag_categories << video_call_software
 financial_assistance = PostCategory.create!(name: "Financial assistance")
 financial_assistance.tag_categories << payment
 
-# ????
-#financial_help = PostCategory.create!(name: "Financial advice")
+# financial_help = PostCategory.create!(name: "Financial advice")
 
 misc = PostCategory.create!(name: "Miscellaneous")
 
@@ -116,34 +115,19 @@ misc = PostCategory.create!(name: "Miscellaneous")
 posts = []
 
 PostCategory.all.each do |post_category|
-
-    5.times do 
+    5.times do
 
         if [true, false].sample
-
-            posts << Post.new(user: User.all.sample, request_offer: true, post_category: post_category, 
-                    title: "I #{ ["can", "could"].sample } #{ ["definitely", "", "certainly"].sample } use some help!", 
+            posts << Post.new(user: User.all.sample, request_offer: true, post_category: post_category,
+                    title: "I #{ ["can", "could"].sample } #{ ["definitely", "", "certainly"].sample } use some help!",
                     details: "I #{ ["can", "could"].sample } #{ ["definitely", "", "certainly"].sample } use some help with #{ post_category.name.downcase }, if you would be so kind")
 
-        else 
-            posts << Post.new(user: User.all.sample, request_offer: false, post_category: post_category, 
-                    title: "#{ ["Can", "Could", "Might"].sample } I help you #{ [true, false].sample ? " out" : "" }?", 
+        else
+            posts << Post.new(user: User.all.sample, request_offer: false, post_category: post_category,
+                    title: "#{ ["Can", "Could", "Might"].sample } I help you #{ [true, false].sample ? " out" : "" }?",
                     details: "I #{ ["would love to", "would like to", "can", "could",].sample } help you out with #{ post_category.name.downcase }, if you need some assistance")
-
         end
-
     end
-
 end
 
 posts.shuffle.each { |post| post.save! }
-
-
-
-
-
-
-
-
-
-
