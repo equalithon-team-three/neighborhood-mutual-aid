@@ -48,3 +48,34 @@ Built using Ruby, Ruby on Rails, and Active Record on the backend and React and 
                   |                  |
                   |                  ^
                   ----------------< Tags
+
+### Heroku Deployment:
+
+1. Set up the [Heroku command line tools](https://devcenter.heroku.com/articles/heroku-cli)
+2. Authenticate using `heroku login`
+3. Add a git remote for heroku:
+
+- **If you are creating a new app...**
+
+  1. `heroku create` or `heroku create YOUR-APP-NAME` if you have a name in mind
+  2. `heroku addons:create heroku-postgresql:hobby-dev` to add ("provision") a PostgreSQL database to your heroku dyno
+
+- **If you already have a Heroku app...**
+
+  `heroku git:remote YOUR-APP-NAME`
+
+- **If you have changed migrations you need to run migration on your provisioned PostgreSQL database...**
+
+  `heroku run rake db:migrate`
+
+- **If you want to seed your provisioned PostgreSQL database...**
+
+  `heroku run rake db:seed` to seed your provisioned PostgreSQL database using /db/seeds.rb
+
+- **If you want to manually deploy your local master branch to your Heroku app...**
+
+  `git push heroku master`
+
+- **If you want to manually deploy another local branch to your Heroku app...**
+
+  `git push heroku LOCAL-BRANCH-NAME:master`
