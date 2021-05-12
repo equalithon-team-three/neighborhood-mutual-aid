@@ -64,9 +64,14 @@ Built using Ruby, Ruby on Rails, and Active Record on the backend and React and 
 
   `heroku git:remote YOUR-APP-NAME`
 
-- **If you have changed migrations you need to run migration on your provisioned PostgreSQL database...**
+- **If you changed migrations...**
 
   `heroku run rake db:migrate`
+
+- **If migrating doesn't update your table columns...**
+
+  1. `heroku pg:reset` to reset your provisioned PostgreSQL database
+  2. `heroku run rake db:schema:load` to create the tables in your provisioned PostgreSQL database using /db/schema.rb
 
 - **If you want to seed your provisioned PostgreSQL database...**
 
