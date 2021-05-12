@@ -78,4 +78,4 @@ Built using Ruby, Ruby on Rails, and Active Record on the backend and React and 
 
 - **If you want to manually deploy another local branch to your Heroku app...**
 
-  `git push heroku LOCAL-BRANCH-NAME:master`
+  `git push heroku LOCAL-BRANCH-NAME:master` or `git push --force heroku LOCAL-BRANCH-NAME:master`
