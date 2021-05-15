@@ -11,7 +11,7 @@ class AuthController < ApplicationController
         email: logged_in_user.email,
         first_name: logged_in_user.first_name,
         last_name: logged_in_user.last_name,
-        full_name: logged_in_user.last_name,
+        full_name: logged_in_user.full_name,
         img_url: logged_in_user.img_url
       }
     else
@@ -30,7 +30,7 @@ class AuthController < ApplicationController
         email: @user.email,
         first_name: @user.first_name,
         last_name: @user.last_name,
-        full_name: @user.last_name,
+        full_name: @user.full_name,
         img_url: @user.img_url
       }
     else
@@ -49,7 +49,7 @@ class AuthController < ApplicationController
         email: @user.email,
         first_name: @user.first_name,
         last_name: @user.last_name,
-        full_name: @user.last_name,
+        full_name: @user.first_name ? "#{@user.first_name} #{ @user.last_name}" : nil,
         img_url: @user.img_url
       }
     else
@@ -66,6 +66,7 @@ class AuthController < ApplicationController
     @user = User.find_or_initialize_by(google_id: request.env['omniauth.auth']['uid'])
     unless @user.persisted?
       @user.update!(
+        google_id: request.env['omniauth.auth']['uid'],
         email: request.env['omniauth.auth']['info']['email'],
         first_name: request.env['omniauth.auth']['info']['first_name'],
         last_name: request.env['omniauth.auth']['info']['last_name'],
@@ -76,7 +77,7 @@ class AuthController < ApplicationController
     end
 
     set_auth_cookie(generate_token(@user.id))
-    redirect_to "http://localhost:3001"
+    redirect_to ENV['ROOT_URL']
   end
 
   private
