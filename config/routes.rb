@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   get '/auth/google_oauth2/callback', to: "auth#google_oauth2_callback"
-
+  # get '/auth/failure', to: redirect('/')
   post '/auth/check', to: 'auth#check'
   post '/auth/login', to: 'auth#login'
   post '/auth/register', to: 'auth#register'
