@@ -49,6 +49,11 @@ Built using Ruby, Ruby on Rails, and Active Record on the backend and React and 
                   |                  ^
                   ----------------< Tags
 
+### Local Development:
+
+1. Install dependencies using `bundle install`
+2. Run local development server using `rails server`
+
 ### Heroku Deployment:
 
 1. Set up the [Heroku command line tools](https://devcenter.heroku.com/articles/heroku-cli)
